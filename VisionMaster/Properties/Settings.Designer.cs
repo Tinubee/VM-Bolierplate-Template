@@ -26,5 +26,64 @@ namespace VisionMaster.Properties
                 return defaultInstance;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Language
+        {
+            get
+            {
+                return ((int)(this["Language"]));
+            }
+            set
+            {
+                this["Language"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SkinName
+        {
+            get
+            {
+                return ((string)(this["SkinName"]));
+            }
+            set
+            {
+                this["SkinName"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SvgPaletteName
+        {
+            get
+            {
+                return ((string)(this["SvgPaletteName"]));
+            }
+            set
+            {
+                this["SvgPaletteName"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UserName
+        {
+            get
+            {
+                return ((string)(this["UserName"]));
+            }
+            set
+            {
+                this["UserName"] = value;
+            }
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace VisionMaster.Schemas
     public class VMControl : List<VMFlow>
     {
 
-        private String SolutionFile { get => Path.Combine(Global.Setting.DefaultPath, "Test.sol"); }
+        private String SolutionFile { get => Path.Combine(Global.Setting.DefaultPath, "VMSample.sol"); }
         public VMGlobals GlobalVariable = new VMGlobals();
         public Boolean Init() => Load();
 

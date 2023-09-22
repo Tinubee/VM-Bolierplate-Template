@@ -21,7 +21,6 @@ namespace VisionMaster
             Setting.Init();
             VMControl.Init();
 
-
             return true;
         }
     }

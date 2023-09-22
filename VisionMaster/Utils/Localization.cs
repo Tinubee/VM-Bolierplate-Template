@@ -1,65 +1,99 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
 
 
 namespace VisionMaster.Utils
 {
-    public class Localization
+    public static class Localization
     {
-        public static TranslationAttribute Title = new TranslationAttribute("LGES VDA590 TPA Total Inspection");
-        public static TranslationAttribute Cancel = new TranslationAttribute("Cancel", "취소", "Zrušiť");
-        public static TranslationAttribute Close = new TranslationAttribute("Close", "닫기", "Zavrieť");
-        public static TranslationAttribute Save = new TranslationAttribute("Save", "저장", "Uložiť");
-        public static TranslationAttribute Delete = new TranslationAttribute("Delete", "삭제", "Odstrániť");
-        public static TranslationAttribute Confirm = new TranslationAttribute("Confirm", "확인", "Potvrďte");
-        public static TranslationAttribute Infomation = new TranslationAttribute("Infomation", "정보", "Informácie");
-        public static TranslationAttribute Warning = new TranslationAttribute("Warning", "경고", "POZOR");
-        public static TranslationAttribute Error = new TranslationAttribute("Error", "오류", "Chyba");
-        public static TranslationAttribute Search = new TranslationAttribute("Search", "조회", "Vyhľadávanie");
-        public static TranslationAttribute Day = new TranslationAttribute("Day", "일자", "Deň");
-        public static TranslationAttribute Time = new TranslationAttribute("Time", "시간", "Čas");
+        public static TranslationAttribute 제목 = new TranslationAttribute("LGES VDA590 TPA Total Inspection");
+        public static TranslationAttribute 취소 = new TranslationAttribute("Cancel", "취소", "Zrušiť");
+        public static TranslationAttribute 닫기 = new TranslationAttribute("Close", "닫기", "Zavrieť");
+        public static TranslationAttribute 저장 = new TranslationAttribute("Save", "저장", "Uložiť");
+        public static TranslationAttribute 삭제 = new TranslationAttribute("Delete", "삭제", "Odstrániť");
+        public static TranslationAttribute 확인 = new TranslationAttribute("Confirm", "확인", "Potvrďte");
+        public static TranslationAttribute 정보 = new TranslationAttribute("Infomation", "정보", "Informácie");
+        public static TranslationAttribute 경고 = new TranslationAttribute("Warning", "경고", "POZOR");
+        public static TranslationAttribute 오류 = new TranslationAttribute("Error", "오류", "Chyba");
+        public static TranslationAttribute 조회 = new TranslationAttribute("Search", "조회", "Vyhľadávanie");
+        public static TranslationAttribute 일자 = new TranslationAttribute("Day", "일자", "Deň");
+        public static TranslationAttribute 시간 = new TranslationAttribute("Time", "시간", "Čas");
 
-        public static Language CurrentLanguage { get; set; } //{ get { return (Language)Properties.Settings.Default.Language; } }
+        public static Language CurrentLanguage { get { return (Language)Properties.Settings.Default.Language; } }
 
         public static void SetCulture()
         {
             if (CurrentLanguage == Language.KO)
+            {
+                MvUtils.Localization.CurrentLanguage = MvUtils.Localization.Language.KO;
                 CultureInfo.CurrentCulture = new CultureInfo("ko-KR", false);
+            }
             else if (CurrentLanguage == Language.SK)
+            {
+                MvUtils.Localization.CurrentLanguage = MvUtils.Localization.Language.EN;
                 CultureInfo.CurrentCulture = new CultureInfo("sk-SK", false);
+            }
             else
+            {
+                MvUtils.Localization.CurrentLanguage = MvUtils.Localization.Language.EN;
                 CultureInfo.CurrentCulture = new CultureInfo("en-US", false);
+            }
         }
 
         public static String GetString(PropertyInfo prop) { return GetString(prop, CurrentLanguage); }
         public static String GetString(PropertyInfo prop, Language lang)
         {
-            TranslationAttribute a = GetAttribute<TranslationAttribute>(prop);
+            TranslationAttribute a = MvUtils.Utils.GetAttribute<TranslationAttribute>(prop);
             if (a == null) return prop.Name;
             return a.GetString(lang);
         }
         public static String GetString(Enum num) { return GetString(num, CurrentLanguage); }
         public static String GetString(Enum num, Language lang)
         {
-            TranslationAttribute a = GetAttribute<TranslationAttribute>(num);
+            TranslationAttribute a = MvUtils.Utils.GetAttribute<TranslationAttribute>(num);
             if (a == null) return num.ToString();
             return a.GetString(lang);
         }
-        public static T GetAttribute<T>(PropertyInfo property)
+
+        public static void SetColumnCaption(GridView view, Type source)
         {
-            if (property == null) return default(T);
-            return (T)property.GetCustomAttributes(typeof(T), true).FirstOrDefault();
+            foreach (GridColumn col in view.Columns)
+            {
+                try
+                {
+                    PropertyInfo p = source.GetProperty(col.FieldName);
+                    if (p == null) continue;
+                    col.Caption = GetString(p);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[{source.Name}, {col.FieldName}] {ex.Message}", "SetColumnCaption");
+                }
+            }
         }
-        public static T GetAttribute<T>(Enum @enum)
+
+        public static void SetColumnCaption(LookUpEdit edit, Type source)
         {
-            Type type = @enum.GetType();
-            return (T)type.GetField(type.GetEnumName(@enum)).GetCustomAttributes(typeof(T), true).FirstOrDefault();
+            foreach (LookUpColumnInfo col in edit.Properties.Columns)
+            {
+                try
+                {
+                    PropertyInfo p = source.GetProperty(col.FieldName);
+                    if (p == null) continue;
+                    col.Caption = GetString(p);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[{source.Name}, {col.FieldName}] {ex.Message}", "SetLookupColumnCaption");
+                }
+            }
         }
     }
 

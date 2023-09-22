@@ -38,11 +38,17 @@
     <Reference Include="DevExpress.BonusSkins.v22.2" />
     <Reference Include="DevExpress.Data.Desktop.v22.2" />
     <Reference Include="DevExpress.Data.v22.2" />
+    <Reference Include="DevExpress.Dialogs.v22.2.Core, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v22.2" />
     <Reference Include="DevExpress.Sparkline.v22.2.Core" />
+    <Reference Include="DevExpress.XtraBars.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraDialogs.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v22.2" />
     <Reference Include="DevExpress.Printing.v22.2.Core" />
     <Reference Include="DevExpress.Drawing.v22.2" />
+    <Reference Include="DevExpress.XtraGrid.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="GlobalVariableModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=df9beaf7c020f858, processorArchitecture=MSIL" />
     <Reference Include="GraphicsSetModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=969f13d2d78c3370, processorArchitecture=MSIL" />
     <Reference Include="ImageSourceModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a03c4a48a6df5e6, processorArchitecture=MSIL" />
@@ -102,6 +108,7 @@
     <Reference Include="VMBaseControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71707d2e549a163e, processorArchitecture=MSIL" />
     <Reference Include="VMControls.BaseInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=14444b8df74b6e6a, processorArchitecture=MSIL" />
     <Reference Include="VMControls.Interface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cb41614600cf774b, processorArchitecture=MSIL" />
+    <Reference Include="VMControls.RenderInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bcfc50547abbb24, processorArchitecture=MSIL" />
     <Reference Include="VMControls.Winform.Release, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2efa940dfee4dc7e, processorArchitecture=MSIL" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -109,6 +116,24 @@
     <Compile Include="Schemas\Setting.cs" />
     <Compile Include="Schemas\VMControl.cs" />
     <Compile Include="Schemas\VMGlobals.cs" />
+    <Compile Include="UI\Control\SetInspection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\SetInspection.Designer.cs">
+      <DependentUpon>SetInspection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Control\SetVariables.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\SetVariables.Designer.cs">
+      <DependentUpon>SetVariables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Control\VmViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\VmViewer.Designer.cs">
+      <DependentUpon>VmViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Form\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,8 +143,29 @@
     <Compile Include="Global.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Form\Teaching.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form\Teaching.Designer.cs">
+      <DependentUpon>Teaching.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form\WaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form\WaitForm.Designer.cs">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Localization.cs" />
-    <Compile Include="Utils\Utils.cs" />
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="UI\Control\SetInspection.hi-IN.resx">
+      <DependentUpon>SetInspection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\SetInspection.resx">
+      <DependentUpon>SetInspection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\VmViewer.resx">
+      <DependentUpon>VmViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Form\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,6 +178,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\Form\Teaching.resx">
+      <DependentUpon>Teaching.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form\WaitForm.resx">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -144,8 +196,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="UI\UserControl\" />
+    <ProjectReference Include="..\..\..\..\..\..\MvUtils\MvUtils\MvUtils.csproj">
+      <Project>{bdb2ed5c-4a7f-4116-b5a0-1831a1ec0624}</Project>
+      <Name>MvUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,5 +1,4 @@
-﻿using DevExpress.XtraEditors.Filtering.Templates;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,14 +7,14 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using VisionMaster.Utils;
+using MvUtils;
 
 namespace VisionMaster.Schemas
 {
     public class Setting
     {
         [Translation("Config Path", "설정 저장 경로"), JsonProperty("ConfigSavePath")]
-        public String DefaultPath { get; set; } = @"C:\Test\Config";
+        public String DefaultPath { get; set; } = @"C:\VMBolierplateTemplate\Config";
 
         private String SvaeFile { get { return Path.Combine(this.DefaultPath, "Config.json"); } }
         public Boolean Init()
@@ -53,10 +52,10 @@ namespace VisionMaster.Schemas
 
         public void Save()
         {
-            //if (!Utils.WriteAllText(SvaeFile, JsonConvert.SerializeObject(this, Utils.JsonSetting())))
-            //{
-
-            //}
+            if (!MvUtils.Utils.WriteAllText(SvaeFile, JsonConvert.SerializeObject(this, MvUtils.Utils.JsonSetting())))
+            {
+                Debug.WriteLine("Failed To Save Setting File.");
+            }
         }
     }
 }
